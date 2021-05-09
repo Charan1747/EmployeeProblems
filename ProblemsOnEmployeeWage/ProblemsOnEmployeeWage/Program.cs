@@ -6,35 +6,37 @@ namespace ProblemsOnEmployeeWage
     {
         public const int IS_FULL_TIME = 1;
         public const int IS_PART_TIME = 2;
-        public const int EMP_RATE_PER_HR = 20;
+        public const int EMP_RATE_PER_HOUR = 20;
         public const int NUM_OF_WORKING_DAYS = 20;
+        public const int MAX_HOURS_IN_MONTH = 100;
         static void Main(string[] args)
         {
-            int empHr = 0;
+            int empHrs = 0;
             int empWage = 0;
             int totalEmpWage = 0;
-            for (int day = 0; day < NUM_OF_WORKING_DAYS; day++)
+            int totalEmpHrs = 0;
+            int total_working_days = 0;
+            while (totalEmpHrs <= MAX_HOURS_IN_MONTH && total_working_days < NUM_OF_WORKING_DAYS)
             {
+                total_working_days++;
                 Random random = new Random();
                 int empCheck = random.Next(0, 3);
                 switch (empCheck)
                 {
                     case IS_FULL_TIME:
-                        empHr = 8;
+                        empHrs = 8;
                         break;
                     case IS_PART_TIME:
-                        empHr = 4;
+                        empHrs = 4;
                         break;
                     default:
-                        empHr = 0;
+                        empHrs = 0;
                         break;
-
                 }
-                empWage = empHr * EMP_RATE_PER_HR;
-                totalEmpWage += empWage;
-                Console.WriteLine("The DailyWage of Employee is :" + empWage);
 
+                totalEmpHrs += empHrs;
             }
+            totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
             Console.WriteLine("The Monthly Salary is : " + totalEmpWage);
         }
     }
