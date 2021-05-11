@@ -8,18 +8,20 @@ namespace ProblemsOnEmployeeWage
         public const int IS_PART_TIME = 2;
         public const int EMP_RATE_PER_HOUR = 20;
         public const int NUM_OF_WORKING_DAYS = 20;
-        public const int MAX_HOURS_IN_MONTH = 100;
-        static void Main(string[] args)
+        public const int MAX_WORKING_HRS = 100;
+        public const int MAX_WORKING_DAYS = 20;
+
+        public static int ComputeEmployeeWage()
         {
             int empHrs = 0;
             int empWage = 0;
             int totalEmpWage = 0;
-            int totalEmpHrs = 0;
-            int total_working_days = 0;
-            while (totalEmpHrs <= MAX_HOURS_IN_MONTH && total_working_days < NUM_OF_WORKING_DAYS)
+            int hrs = 0;
+            int workingDays = 1;
+            Random random = new Random();
+            while (hrs < MAX_WORKING_HRS && workingDays <= MAX_WORKING_DAYS)
             {
-                total_working_days++;
-                Random random = new Random();
+                workingDays++;
                 int empCheck = random.Next(0, 3);
                 switch (empCheck)
                 {
@@ -34,10 +36,20 @@ namespace ProblemsOnEmployeeWage
                         break;
                 }
 
-                totalEmpHrs += empHrs;
+                empWage = EMP_RATE_PER_HOUR * empHrs;
+                hrs += empHrs;
+                totalEmpWage = totalEmpWage + empWage;
             }
-            totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
-            Console.WriteLine("The Monthly Salary is : " + totalEmpWage);
+            Console.WriteLine("Employe Wage Per Day:" + empWage);
+            Console.WriteLine("Total Employe Month Wage: " + totalEmpWage);
+            Console.WriteLine("Employee wage for " + workingDays + "Days " + totalEmpWage);
+            Console.WriteLine("Working hours " + hrs);
+            return totalEmpWage;
         }
-    }
+        public static void Main(String[] args)
+        {
+            Program.ComputeEmployeeWage();
+
+        }
+}
 }
